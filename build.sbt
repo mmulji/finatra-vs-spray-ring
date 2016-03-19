@@ -10,7 +10,8 @@ scalaVersion := "2.11.7"
 resolvers += "twttr" at "https://maven.twttr.com/"
 
 libraryDependencies ++= {
-  val akkaVersion     = "2.4.2"
+  val akkaVersion = "2.4.2"
+  val sprayVersion = "1.3.1"
   val scalaTestVersion = "2.2.3"
   val finatraVersion = "2.1.4"
 
@@ -25,11 +26,21 @@ libraryDependencies ++= {
       ExclusionRule("asm") // exclude because of conflict creating test report with PegDown
     ),
 
+    // -- Akka --
     "com.typesafe.akka" %% "akka-actor" % akkaVersion,
     "com.typesafe.akka" %% "akka-slf4j"  % akkaVersion,
     "com.typesafe.akka" %% "akka-testkit" % akkaVersion % "test",
 
-      // Test
+    // -- Spray --
+    "io.spray" %% "spray-routing" % sprayVersion,
+    "io.spray" %% "spray-can" % sprayVersion,
+    "io.spray" %% "spray-httpx" % sprayVersion,
+    "io.spray" %% "spray-testkit" % sprayVersion % "test",
+
+    // -- Json --
+    "org.json4s" %% "json4s-native" % "3.2.11",
+
+    // Test
     "org.scalatest" % "scalatest_2.11" % scalaTestVersion % "test",
     "org.pegdown" % "pegdown" % "1.4.2" % "test",         // needed by scalatest for html report
     "org.scalacheck" %% "scalacheck" % "1.12.4" % "test", // needed by scalatest for property based tests

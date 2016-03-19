@@ -1,14 +1,15 @@
-import com.twitter.finagle.{Http, Service}
+package finatra.one
+
 import com.twitter.finagle.http.{Request, Response, Status}
-import com.twitter.io.Charsets
+import com.twitter.finagle.{Http, Service}
 import com.twitter.server.TwitterServer
 import com.twitter.util.{Await, Future}
 
-object BasicServer extends TwitterServer {
+object HelloWorldServer extends TwitterServer {
   val service = new Service[Request, Response] {
     def apply(request: Request) = {
       val response = Response(request.version, Status.Ok)
-      response.contentString = "hello"
+      response.contentString = "Hello World"
       Future.value(response)
     }
   }
